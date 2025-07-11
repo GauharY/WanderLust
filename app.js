@@ -43,10 +43,17 @@ app.get("/listings/new", (req,res)=>{
 });
 
 // CREATE route
-app.post("/listings", async (req,res)=>{
-    const newListing=new Listing(req.body.listing);
-    await newListing.save();
-    res.redirect("/listings");
+// app.post("/listings", async (req,res)=>{
+//     const newListing=new Listing(req.body.listing);
+//     await newListing.save();
+//     res.redirect("/listings");
+// });
+app.post("/listings", async (req, res) => {
+  const { listing, listingImageUrl } = req.body;
+  const newListing = new Listing(listing);
+  newListing.image = { url: listingImageUrl, filename: "" }; // manual override
+  await newListing.save();
+  res.redirect("/listings");
 });
 
 // EDIT route
@@ -58,11 +65,20 @@ app.get("/listings/:id/edit", async (req,res)=>{
 
 
 // UPDATE route
-app.put("/listings/:id", async(req,res)=>{
-    let{id}=req.params;
-    await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    res.redirect(`/listings/${id}`);
+// app.put("/listings/:id", async(req,res)=>{
+//     let{id}=req.params;
+//     await Listing.findByIdAndUpdate(id,{...req.body.listing});
+//     res.redirect(`/listings/${id}`);
+// });
+app.put("/listings/:id", async (req, res) => {
+  const { id } = req.params;
+  const { listing, listingImageUrl } = req.body;
+
+  listing.image = { url: listingImageUrl, filename: "" };
+  await Listing.findByIdAndUpdate(id, listing);
+  res.redirect(`/listings/${id}`);
 });
+
 // GET route
 app.get("/listings/:id",async (req,res)=>{
     let{id}=req.params;
