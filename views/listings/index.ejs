@@ -1,10 +1,5 @@
 <%layout("/layouts/boilerplate")-%>
-<body>
-    <h3>All Listings</h3>
-    <!-- <form method="GET" action="/listings/new">
-        <button>Create New Listings</button>
-    </form> -->
-
+    <h1 style="color: #fe424d">WanderLust</h1>
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-3 my-3"> 
         <% for(let listings of allListings){%>
         <a href="/listings/<%=listings._id%>" class="listing-link">
@@ -27,8 +22,5 @@
         </a>
     <%}%>
 </div>
-   
-
-</body>
 
 

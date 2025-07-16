@@ -1,3 +1,4 @@
+// server side validations
 const Joi=require("joi");
 module.exports.listingSchema=Joi.object({
     listing:Joi.object({
@@ -8,7 +9,7 @@ module.exports.listingSchema=Joi.object({
         price:Joi.number().required().min(0),
         image:Joi.string().allow("",null)
     }).required()
-});
+}).unknown();
 
 
 module.exports.reviewSchema=Joi.object({
