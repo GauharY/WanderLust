@@ -13,6 +13,17 @@
         <a class="nav-link" href="/listings">All Listings</a>
         <a class="nav-link" href="/listings/new">Add New Listings</a>
       </div>
+      <div class="navbar-nav ms-auto">
+<!-- we will be showing the signup and login button only when we are not logged in on our website -->
+<!-- we cannot directly use our req.user in ejs template, so we will save it in our locals in app.js and then use it in our ejs template -->
+         <% if(!currUser){ %>
+          <a class="nav-link" href="/signup">SignUp</a>
+          <a class="nav-link" href="/login">LogIn</a>
+        <% } %>
+        <% if(currUser){ %>
+          <a class="nav-link" href="/logout">LogOut</a>
+        <% } %>
+      </div>
     </div>
   </div>
-</nav>
+</nav> 
